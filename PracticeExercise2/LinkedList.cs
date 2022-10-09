@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+
 namespace PracticeExercise2
 {
     //using this to test commit
@@ -8,7 +10,7 @@ namespace PracticeExercise2
         public T Data { get; set; }
         public LinkedListNode<T> Next { get; set; }
 
-        public LinkedListNode(T data = default(T), LinkedListNode<T> next=null)
+        public LinkedListNode(T data = default(T), LinkedListNode<T> next =null)
         {
             Data = data;
             Next = next;
@@ -21,24 +23,27 @@ namespace PracticeExercise2
 
     }
 
-	public class LinkedList<T>: IList<T>
-	{
-        public LinkedListNode<T> Head { get; set; }
-        public LinkedListNode<T> Tail { get; set; }
+    public class LinkedList<T> : IList<T>
+    {
+        public LinkedListNode<T>? Head { get; set; }
+        public LinkedListNode<T>? Tail { get; set; }
 
-		public LinkedList()
-		{
+        public LinkedList()
+        {
             Head = null;
             Tail = null;
-		}
+        }
 
-        public T? First => throw new NotImplementedException();
+        public T? First { get; }
 
-        public T? Last => throw new NotImplementedException();
+        public T? Last { get; }
 
-        public bool IsEmpty => throw new NotImplementedException();
+        public bool IsEmpty => Head == null || Tail == null;
+        
+    
 
-        private int length = 0;
+
+    private int length = 0;
         public int Length => length;
 
         public void Append(T value)
@@ -116,9 +121,12 @@ namespace PracticeExercise2
 
         public void Prepend(T value)
         {
+            var newNode = new LinkedListNode<T>(value);
+            if (IsEmpty)
+
             length++;
 
-            throw new NotImplementedException();
+            
         }
 
         public void Remove(T value)
