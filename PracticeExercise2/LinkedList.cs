@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace PracticeExercise2
 {
@@ -106,10 +107,28 @@ namespace PracticeExercise2
 
         public void InsertAfter(T newValue, int existingValue)
         {
+            var newNode = new LinkedListNode<T>(newValue);
+            var curNode = new LinkedListNode<T>();
+            if (IsEmpty)
+            {
+                Head = newNode;
+                Tail = newNode;
+            }
+            else if(curNode == Tail)
+            {
+                Tail.Next = newNode;
+                Tail = newNode;
+            }
+            else
+            {
+                newNode.Next = curNode.Next;
+                curNode.Next = newNode;
+
+            }
 
             length++;
 
-            throw new NotImplementedException();
+           
         }
 
         public void InsertAt(T value, int index)
@@ -122,9 +141,18 @@ namespace PracticeExercise2
         public void Prepend(T value)
         {
             var newNode = new LinkedListNode<T>(value);
-            if (IsEmpty)
 
-            length++;
+            if (IsEmpty)
+            {
+                Head = newNode;
+                Tail = newNode;
+            }
+            else
+            {
+                newNode.Next = Head;
+                Head = newNode;
+            }
+            
 
             
         }

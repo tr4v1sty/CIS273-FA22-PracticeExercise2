@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Collections;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PracticeExercise2;
 
 namespace UnitTests
@@ -197,7 +198,7 @@ namespace UnitTests
             list.InsertAt(62, list.Length - 1);
             Assert.AreEqual("[42,0,1,52,2,3,62,4]", list.ToString().Replace(" ", ""));
 
-            list.InsertAt(72, list.Length );
+            list.InsertAt(72, list.Length);
             Assert.AreEqual("[42,0,1,52,2,3,62,4,72]", list.ToString().Replace(" ", ""));
 
 
@@ -368,6 +369,28 @@ namespace UnitTests
 
             Assert.AreEqual("[0,1,2,3,4]", reversed.Reverse().ToString().Replace(" ", ""));
         }
+
+
+        [TestMethod]
+        public void TestGet()
+        {
+            PracticeExercise2.IList<int> list = new PracticeExercise2.LinkedList<int>();
+            for (int i = 0; i < 5; i++)
+            {
+                list.Append(i);
+            }
+
+            Assert.AreEqual(0, list.Get(0));
+            Assert.AreEqual(1, list.Get(1));
+            Assert.AreEqual(2, list.Get(2));
+
+            for (int i = 5; i < 50; i++)
+            {
+                list.Append(i);
+            }
+
+            Assert.AreEqual(45, list.Get(45));
+            Assert.AreEqual(10, list.Get(10));
+        }
     }
 }
-
