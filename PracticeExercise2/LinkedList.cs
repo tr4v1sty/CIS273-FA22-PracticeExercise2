@@ -31,11 +31,11 @@ namespace PracticeExercise2
             Tail = null;
 		}
 
-        public T? First => throw new NotImplementedException();
+        public T? First => IsEmpty ? default(T) : Head.Data;
 
-        public T? Last => throw new NotImplementedException();
+        public T? Last => IsEmpty ? default(T) : Tail.Data;
 
-        public bool IsEmpty => throw new NotImplementedException();
+        public bool IsEmpty => Head == null;
 
         private int length = 0;
         public int Length => length;
@@ -95,10 +95,31 @@ namespace PracticeExercise2
 
         public T Get(int index)
         {
-            throw new NotImplementedException();
+            if ( index < 0 || index >= length)
+            {
+                throw new IndexOutOfRangeException();
+            }
+
+            // traverse
+
+            var currentNode = Head;
+            int currentIndex = 0;
+
+            while( currentNode != null )
+            {
+                if( currentIndex == index )
+                {
+                    return currentNode.Data;
+                }
+
+                currentNode = currentNode.Next;
+                currentIndex++;
+            }
+
+            return default(T);
         }
 
-        public void InsertAfter(T newValue, int existingValue)
+        public void InsertAfter(T newValue, T existingValue)
         {
 
             length++;
@@ -108,16 +129,62 @@ namespace PracticeExercise2
 
         public void InsertAt(T value, int index)
         {
-            length++;
 
-            throw new NotImplementedException();
+            if (index < 0 || index > length)
+            {
+                throw new IndexOutOfRangeException();
+            }
+
+            if( index == 0)
+            {
+                Prepend(value);
+            }
+
+            // traverse
+            var currentNode = Head;
+            int currentIndex = 0;
+
+            while (currentNode != null)
+            {
+                // find the node at index - 1
+                if (currentIndex == index - 1)
+                {
+                    // insert the new node
+                    var newNode = new LinkedListNode<T>(value);
+                    newNode.Next = currentNode.Next;
+                    currentNode.Next = newNode;
+
+                    if ( currentNode == Tail)
+                    {
+                        Tail = newNode;
+                    }
+
+                    length++;
+                }
+
+                currentNode = currentNode.Next;
+                currentIndex++;
+            }
+
+            
         }
 
         public void Prepend(T value)
         {
-            length++;
+            var newNode = new LinkedListNode<T>(value);
 
-            throw new NotImplementedException();
+            if (IsEmpty)
+            {
+                Head = newNode;
+                Tail = newNode;
+            }
+            else
+            {
+                newNode.Next = Head;
+                Head = newNode;
+            }
+
+            length++;
         }
 
         public void Remove(T value)

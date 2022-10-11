@@ -374,7 +374,7 @@ namespace UnitTests
         [TestMethod]
         public void TestGet()
         {
-            PracticeExercise2.IList<int> list = new PracticeExercise2.LinkedList<int>();
+            PracticeExercise2.IList<int> list = new PracticeExercise2.LinkedList<int>();        
             for (int i = 0; i < 5; i++)
             {
                 list.Append(i);
@@ -391,6 +391,12 @@ namespace UnitTests
 
             Assert.AreEqual(45, list.Get(45));
             Assert.AreEqual(10, list.Get(10));
+
+
+            Assert.ThrowsException<IndexOutOfRangeException>(() =>
+            {
+                list.Get(142);
+            });
         }
     }
 }
