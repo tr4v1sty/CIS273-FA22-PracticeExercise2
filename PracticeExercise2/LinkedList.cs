@@ -73,11 +73,22 @@ namespace PracticeExercise2
             Tail = null;
 
             length = 0;
+            
         }
 
         public bool Contains(T value)
         {
-            throw new NotImplementedException();
+            var curNode = Head;
+            while (curNode != null) 
+            {
+                if (curNode.Data.Equals(value))
+                {
+                    return true;
+                }
+                curNode = curNode.Next;
+               
+            }
+            return false;
         }
 
         public int FirstIndexOf(T value)
@@ -108,27 +119,36 @@ namespace PracticeExercise2
         public void InsertAfter(T newValue, int existingValue)
         {
             var newNode = new LinkedListNode<T>(newValue);
-            var curNode = new LinkedListNode<T>();
-            if (IsEmpty)
+            var curNode = Head;
+            while (curNode != null)
             {
-                Head = newNode;
-                Tail = newNode;
+                if (IsEmpty)
+                {
+                    Head = newNode;
+                    Tail = newNode;
+                    length++;
+                }
+                if (curNode.Data.Equals(existingValue))
+                {
+                    if (curNode == Tail)
+                    {
+                        curNode.Next = newNode;
+                        Tail = newNode;
+                        length++;
+                        return;
+                    }
+                    else
+                    {
+                        newNode.Next = curNode.Next;
+                        curNode.Next = newNode;
+                        length++;
+                        return;
+                    }
+                }
+                curNode = curNode.Next;
             }
-            else if(curNode == Tail)
-            {
-                Tail.Next = newNode;
-                Tail = newNode;
-            }
-            else
-            {
-                newNode.Next = curNode.Next;
-                curNode.Next = newNode;
-
-            }
-
-            length++;
-
-           
+            Append(newValue);
+            length++; 
         }
 
         public void InsertAt(T value, int index)
@@ -152,7 +172,7 @@ namespace PracticeExercise2
                 newNode.Next = Head;
                 Head = newNode;
             }
-            
+            length++;
 
             
         }
