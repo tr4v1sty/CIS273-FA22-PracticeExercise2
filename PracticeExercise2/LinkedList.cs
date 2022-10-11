@@ -110,10 +110,7 @@ namespace PracticeExercise2
 
         public T Get(int index)
         {
-            if (index < 0 || index >= length)
-            {
-                throw new ArgumentOutOfRangeException("index");
-            }
+            
 
             var curIndex = 0;
             var curNode = Head;
@@ -127,13 +124,13 @@ namespace PracticeExercise2
                 curIndex++;
 
             }
-            return default(T);   
-                
-            
+            throw new IndexOutOfRangeException();
+
+
         }
 
 
-        public void InsertAfter(T newValue, int existingValue)
+        public void InsertAfter(T newValue, T existingValue)
         {
             var newNode = new LinkedListNode<T>(newValue);
             var curNode = Head;
@@ -276,15 +273,23 @@ namespace PracticeExercise2
 
         public void RemoveAt(int index)
         {
-
-            // length--;
-
             throw new NotImplementedException();
+
+            
         }
+
+        
 
         public IList<T> Reverse()
         {
-            throw new NotImplementedException();
+            IList<T> reverseList = new LinkedList<T>();
+            var curNode = Head;
+            while (curNode != null)
+            {
+                reverseList.Prepend(curNode.Data);
+                curNode = curNode.Next;
+            }
+            return reverseList;
         }
 
         public override string ToString()
