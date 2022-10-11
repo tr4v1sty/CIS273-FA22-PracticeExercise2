@@ -273,7 +273,7 @@ namespace PracticeExercise2
 
         public void RemoveAt(int index)
         {
-            throw new NotImplementedException();
+            Remove(Get(index));
 
             
         }
