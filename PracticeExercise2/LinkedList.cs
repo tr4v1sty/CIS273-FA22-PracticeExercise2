@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using static System.Net.Mime.MediaTypeNames;
+
 
 namespace PracticeExercise2
 {
@@ -35,16 +34,16 @@ namespace PracticeExercise2
             Tail = null;
         }
 
-        public T? First { get; }
+        public T? First => Head.Data;
 
-        public T? Last { get; }
+        public T? Last => Tail.Data;
 
         public bool IsEmpty => Head == null || Tail == null;
-        
+        //this was auto fill done but it says true or false bool so it works
     
 
 
-    private int length = 0;
+        private int length = 0;
         public int Length => length;
 
         public void Append(T value)
@@ -62,7 +61,6 @@ namespace PracticeExercise2
                 Tail.Next = newNode;
                 Tail = newNode;
             }
-
             length++;
 
         }
@@ -72,8 +70,7 @@ namespace PracticeExercise2
             Head = null;
             Tail = null;
 
-            length = 0;
-            
+            length = 0;   
         }
 
         public bool Contains(T value)
