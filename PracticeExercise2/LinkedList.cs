@@ -34,9 +34,9 @@ namespace PracticeExercise2
             Tail = null;
         }
 
-        public T? First => Head.Data;
+        public T? First => IsEmpty ? default(T) : Head.Data;
 
-        public T? Last => Tail.Data;
+        public T? Last => IsEmpty ? default(T)  : Tail.Data;
 
         public bool IsEmpty => Head == null || Tail == null;
         //this was auto fill done but it says true or false bool so it works
@@ -110,8 +110,28 @@ namespace PracticeExercise2
 
         public T Get(int index)
         {
-            throw new NotImplementedException();
+            if (index < 0 || index >= length)
+            {
+                throw new ArgumentOutOfRangeException("index");
+            }
+
+            var curIndex = 0;
+            var curNode = Head;
+            while (curNode != null)
+            {
+                if(curIndex == index)
+                {
+                    return curNode.Data;
+                }
+                curNode = curNode.Next;
+                curIndex++;
+
+            }
+            return default(T);   
+                
+            
         }
+
 
         public void InsertAfter(T newValue, int existingValue)
         {
@@ -150,9 +170,36 @@ namespace PracticeExercise2
 
         public void InsertAt(T value, int index)
         {
-            length++;
+            if (index < 0 || index > length)
+            {
+                throw new IndexOutOfRangeException();
+            }
+            if(index == 0)
+            {
+                Prepend(value);
+            }
+            
+            var curIndex = 0;
+            var curNode = Head;
 
-            throw new NotImplementedException();
+            while (curNode != null)
+            {
+                // find the node at index - 1
+                if (curIndex == index - 1)
+                {
+                   var newNode = new LinkedListNode<T>(value);
+                    newNode.Next = curNode.Next;
+                    curNode.Next = newNode;
+                    length++;
+                    if(curNode == Tail)
+                    {
+                        Tail = newNode;
+                    }
+                }
+                curNode = curNode.Next;
+                curIndex++;
+
+            }
         }
 
         public void Prepend(T value)
